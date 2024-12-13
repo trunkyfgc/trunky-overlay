@@ -1,0 +1,8 @@
+[package]
+name = "models"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rust-embed = "8.5.0"
+clap = { version = "4.5.23", features = ["derive"] }
