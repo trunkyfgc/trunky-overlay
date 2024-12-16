@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'Cargo.toml'
+      - 'src/**'
+      - 'libs/**'
+      - 'static/**'
+      - '.github/**'
   pull_request: null
 jobs:
   build-static:
@@ -164,7 +170,7 @@ jobs:
           name: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-${{ matrix.target }}
           path: ./target/release/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}${{ matrix.suffix }}
   release:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     needs:
       - build
     runs-on: ubuntu-latest
