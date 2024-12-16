@@ -191,14 +191,20 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-unknown-linux-gnu
+          path: linux
       - uses: actions/download-artifact@master
         with:
           name: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-apple-darwin
+          path: macos
       - uses: actions/download-artifact@master
         with:
           name: ${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-pc-windows-msvc
+          path: windows
       - run: |
           ls -l -a
+          rn ./windows/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}.exe ./windows/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-pc-windows-msvc.exe 
+          rn ./linux/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }} ./linux/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-unknown-linux-gnu
+          rn ./macos/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }} ./macos/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-apple-darwin
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
@@ -220,6 +226,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ./${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-unknown-linux-gnu
-            ./${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-apple-darwin
-            ./${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-pc-windows-msvc.exe
+            ./windows/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-pc-windows-msvc.exe 
+            ./linux/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-unknown-linux-gnu
+            ./macos/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-apple-darwin
