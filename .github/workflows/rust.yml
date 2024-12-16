@@ -45,7 +45,7 @@ jobs:
       - uses:  actions/download-artifact@v4
         with:  
           name: static-release
-          path: /static/build
+          path: static/build
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
@@ -147,7 +147,7 @@ jobs:
       - uses:  actions/download-artifact@v4
         with:  
           name: static-release
-          path: /static/build
+          path: static/build
       - uses: actions-rs/cargo@v1
         env:
           VERSION: '${{ steps.get_version.outputs.VERSION }}'
