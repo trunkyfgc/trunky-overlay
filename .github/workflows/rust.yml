@@ -184,6 +184,7 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: version
+          path: version
       - id: get_version
         run: 'echo ::set-output name=VERSION::$(cat ./version/version)'
         shell: bash
