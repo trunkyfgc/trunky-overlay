@@ -110,9 +110,14 @@ jobs:
       - id: get_repository_name
         run: echo ::set-output name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")
         shell: bash
-      - uses: actions/download-artifact@master
+      - uses: actions/download-artifact@v4
         with:
           name: version
+          path: version/version
+      - uses:  actions/download-artifact@v4
+        with:  
+          name: static-release
+          path: static/build
       - id: get_version
         run: 'echo ::set-output "name=VERSION::$(cat ./version/version)"'
         shell: bash
@@ -144,10 +149,6 @@ jobs:
           TEMP_FILE="$(mktemp)"
           toml set Cargo.toml package.version "${VERSION:1}" > "$TEMP_FILE"
           mv "$TEMP_FILE" Cargo.toml
-      - uses:  actions/download-artifact@v4
-        with:  
-          name: static-release
-          path: static/build
       - uses: actions-rs/cargo@v1
         env:
           VERSION: '${{ steps.get_version.outputs.VERSION }}'
