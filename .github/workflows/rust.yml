@@ -212,11 +212,6 @@ jobs:
         shell: bash
         env:
           VERSION: '${{ steps.get_version.outputs.VERSION }}'
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Bump cargo version
-          branch: ${{ github.head_ref }}
-          file_pattern: Cargo.toml
       - id: create_release
         uses: actions/create-release@v1.0.0
         env:
