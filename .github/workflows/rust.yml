@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - '*'
+      - 'main'
   pull_request: null
 jobs:
   build-static:
@@ -17,10 +17,13 @@ jobs:
           cd static
           npm i
           npm run build
+          cd ..
+      - run: ls
       - uses: actions/upload-artifact@v4
         with:
           name: static-release
-          path: ./build
+          path: static/build
+          compression-level: 9
   check:
     needs:
       - build-static
