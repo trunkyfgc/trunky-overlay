@@ -113,11 +113,14 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: version
-          path: version/version
+          path: version
       - uses:  actions/download-artifact@v4
         with:  
           name: static-release
           path: static/build
+      - run: |
+        cd version
+        ls
       - id: get_version
         run: 'echo ::set-output "name=VERSION::$(cat ./version/version)"'
         shell: bash
