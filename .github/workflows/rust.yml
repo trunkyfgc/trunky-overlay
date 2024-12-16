@@ -72,7 +72,6 @@ jobs:
   build:
     needs:
       - version
-      - lints
       - check
     runs-on: '${{ matrix.os }}'
     strategy:
