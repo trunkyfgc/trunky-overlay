@@ -27,6 +27,13 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
+      - uses: actions/setup-node@v4
+        with: 
+          node-version: 18
+      - run: |
+          cd static
+          npm run build
+          cd ..
       - uses: actions-rs/cargo@v1
         with:
           command: check
