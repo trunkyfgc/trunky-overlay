@@ -6,7 +6,19 @@ on:
       - '*'
   pull_request: null
 jobs:
+  build-static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with: 
+          node-version: 18
+      - run: |
+          cd static
+          npm i
+          npm run build
   check:
+    needs:
+      - build-static
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,14 +39,6 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      - uses: actions/setup-node@v4
-        with: 
-          node-version: 18
-      - run: |
-          cd static
-          npm i
-          npm run build
-          cd ..
       - uses: actions-rs/cargo@v1
         with:
           command: check
@@ -54,11 +58,11 @@ jobs:
           version: '${{ steps.get_previous_version.outputs.PREVIOUS_VERSION }}'
       - run: mkdir -p ./version
       - if: "!contains(github.event.head_commit.message, 'BC BREAK') && !contains(github.event.head_commit.message, 'Signed-off-by: dependabot-preview[bot] <support@dependabot.com>')"
-        run: echo "$VERSION" >./version/version
+        run: echo "$VERSION" > ./version/version
         env:
           VERSION: ${{ steps.semvers.outputs.v_minor }}
       - if: "contains(github.event.head_commit.message, 'Signed-off-by: dependabot-preview[bot] <support@dependabot.com>')"
-        run: echo "$VERSION" >./version/version
+        run: echo "$VERSION" > ./version/version
         env:
           VERSION: ${{ steps.semvers.outputs.v_patch }}
       - run: echo "$VERSION" > ./version/version
@@ -71,6 +75,7 @@ jobs:
           path: ./version/version
   build:
     needs:
+      - build-static
       - version
       - check
     runs-on: '${{ matrix.os }}'
@@ -127,14 +132,6 @@ jobs:
           TEMP_FILE="$(mktemp)"
           toml set Cargo.toml package.version "${VERSION:1}" > "$TEMP_FILE"
           mv "$TEMP_FILE" Cargo.toml
-      - uses: actions/setup-node@v4
-        with: 
-          node-version: 18
-      - run: |
-          cd static
-          npm i
-          npm run build
-          cd ..
       - uses: actions-rs/cargo@v1
         env:
           VERSION: '${{ steps.get_version.outputs.VERSION }}'
