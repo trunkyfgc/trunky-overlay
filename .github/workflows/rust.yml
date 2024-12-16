@@ -17,6 +17,10 @@ jobs:
           cd static
           npm i
           npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-release
+          path: /static/build
   check:
     needs:
       - build-static
@@ -35,6 +39,10 @@ jobs:
         with:
           path: target
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+      - uses:  actions/download-artifact@v4
+        with:  
+          name: static-release
+          path: /static/build
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
@@ -133,6 +141,10 @@ jobs:
           TEMP_FILE="$(mktemp)"
           toml set Cargo.toml package.version "${VERSION:1}" > "$TEMP_FILE"
           mv "$TEMP_FILE" Cargo.toml
+      - uses:  actions/download-artifact@v4
+        with:  
+          name: static-release
+          path: /static/build
       - uses: actions-rs/cargo@v1
         env:
           VERSION: '${{ steps.get_version.outputs.VERSION }}'
