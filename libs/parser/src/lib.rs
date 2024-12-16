@@ -1,9 +1,4 @@
-use clap;
-use rust_embed::RustEmbed;
-
-#[derive(RustEmbed, Clone)]
-#[folder = "../../static/build/"]
-pub struct Static;
+use clap::Parser;
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, clap::ValueEnum)]
 pub enum FallbackBehavior {
@@ -35,4 +30,8 @@ pub struct Opt {
         help = "Disable serving index.html if path is directory"
     )]
     pub no_index: bool,
+}
+
+pub fn get_parse_opt() -> Opt {
+    Opt::parse()
 }

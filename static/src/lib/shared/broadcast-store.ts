@@ -1,18 +1,23 @@
 import { writable, type Updater, type StartStopNotifier } from 'svelte/store';
+import socket from './socket-singleton'
 
 export function broadcastable<T>(name: string, value?: T, start: StartStopNotifier<T> = () => { }) {
-  let channel: BroadcastChannel | null = null;
-
   const {
     subscribe: _subscribe,
     set: _set,
     update: _update
   } = writable<T>(value, (set, update) => {
-    channel = new BroadcastChannel(name);
-    channel.addEventListener('message', ({ data }) => set(data));
+    socket.on('message-back', (message) => {
+      if (message.from === socket.id || message.topic !== name) {
+        return;
+      }
+      set(message.data)
+    })
+
     const stop = start(set, update);
+
     return () => {
-      channel?.close();
+      socket?.close()
       if (stop) stop();
     };
   });
@@ -20,14 +25,22 @@ export function broadcastable<T>(name: string, value?: T, start: StartStopNotifi
   function update(updater: Updater<T>) {
     _update((value) => {
       const newValue = updater(value);
-      channel?.postMessage(newValue);
+      broadcastMessage(value)
       return newValue;
     });
   }
 
   function set(value: T) {
-    channel?.postMessage(value);
+    broadcastMessage(value)
     _set(value);
+  }
+
+  function broadcastMessage(data: T) {
+    socket?.emit('message', {
+      data,
+      topic: name,
+      from: socket.id
+    })
   }
 
   return {

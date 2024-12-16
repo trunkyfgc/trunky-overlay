@@ -13,5 +13,5 @@ const initial_value: Scoreboard = {
   title: ""
 }
 
-export const scoreboardStore = { ...broadcastable(key, initial_value) }
+export const scoreboardStore = broadcastable(key, initial_value)
 

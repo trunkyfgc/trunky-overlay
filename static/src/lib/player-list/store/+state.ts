@@ -5,6 +5,5 @@ import key from './+key'
 
 const initial_value: string[] = []
 
-export const playerListStore = {
-  ...broadcastable(key, initial_value)
-}
+export const playerListStore = broadcastable(key, initial_value)
+

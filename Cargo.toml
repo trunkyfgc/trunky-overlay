@@ -4,11 +4,16 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.7.9"
-axum-embed = "0.1.0"
-clap = { version = "4.5.23", features = ["derive"] }
+axum = "0.7"
 tokio = { version = "1.42.0", features = ["rt-multi-thread", "macros"] }
 anyhow = "1.0"
+tower-http ={ version="0.6.2", features= ["cors"] }
 
-[dependencies.models]
-path= "./libs/models"
+[dependencies.embed_static]
+path= "./libs/embed_static"
+
+[dependencies.socket]
+path= "./libs/socket"
+
+[dependencies.parser]
+path= "./libs/parser"
