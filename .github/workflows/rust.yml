@@ -224,6 +224,7 @@ jobs:
       - id: create_release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: '${{ steps.get_version.outputs.VERSION }}'
           files: |
             ./windows/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-pc-windows-msvc.exe 
             ./linux/${{ steps.get_repository_name.outputs.REPOSITORY_NAME }}-x86_64-unknown-linux-gnu
