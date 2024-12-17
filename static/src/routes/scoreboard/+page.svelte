@@ -27,7 +27,7 @@
 		font-family: 'CityBrawlers';
 		font-style: normal;
 		font-weight: normal;
-		src: url('fonts/CityBrawlersBoldCaps.otf') format('opentype');
+		src: url('fonts/CityBrawlersBoldCaps.woff2') format('woff2');
 	}
 
 	* {
@@ -35,7 +35,7 @@
 	}
 
 	.background {
-		background-image: url(./assets/scoreboard-dn.png);
+		background-image: url(./assets/scoreboard-dn.webp);
 		width: 1920px;
 		height: 1080px;
 		position: relative;
