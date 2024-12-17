@@ -17,3 +17,9 @@ path= "./libs/socket"
 
 [dependencies.parser]
 path= "./libs/parser"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+codegen-units = 1
+strip = true
