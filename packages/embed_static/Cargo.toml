@@ -1,0 +1,11 @@
+[package]
+name = "embed_static"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum-embed = "0.1.0"
+rust-embed = "8.5.0"
+
+[dependencies.parser]
+path = "../parser"

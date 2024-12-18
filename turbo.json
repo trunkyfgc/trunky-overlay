@@ -1,10 +1,18 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "daemon": true,
+  "envMode": "strict",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".svelte-kit/**", ".vercel/**"]
+      "outputs": [".svelte-kit/**", ".vercel/**", "target/release/**"]
+    },
+    "build:prod": {
+      "dependsOn": ["^build", "^build:prod"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".svelte-kit/**", ".vercel/**", "target/release/**"],
+      "env": ["TARGET"]
     },
     "lint": {},
     "dev": {
