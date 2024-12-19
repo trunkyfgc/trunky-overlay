@@ -48,6 +48,9 @@ jobs:
       - name: Install Rust build target
         uses: actions-rs/toolchain@v1
         with:
+          profile: minimal
+          toolchain: stable
+          override: true
           target: ${{ matrix.target }}
 
       - name: Cache for Turbo
