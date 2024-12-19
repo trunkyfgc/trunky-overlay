@@ -12,6 +12,9 @@ jobs:
     runs-on: '${{ matrix.os }}'
     env:
      TARGET: ${{ matrix.target }}
+     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+ 
     strategy:
       matrix:
         include:
