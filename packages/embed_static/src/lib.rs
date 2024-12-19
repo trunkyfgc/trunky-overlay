@@ -4,7 +4,7 @@ use parser::{get_parse_opt, FallbackBehavior};
 use rust_embed::RustEmbed;
 
 #[derive(RustEmbed, Clone)]
-#[folder = "../../apps/ui/build"]
+#[folder = "../../apps/ui/dist"]
 pub struct Static;
 
 pub fn new_service() -> ServeEmbed<Static> {
