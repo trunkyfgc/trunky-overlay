@@ -2,13 +2,10 @@
   "name": "server",
   "scripts": {
     "build": "cargo build --release ",
-    "build:linux": "npm run build -- --target=x86_64-unknown-linux-gnu",
-    "build:macos": "npm run build -- --target=x86_64-apple-darwin",
-    "build:windows": "npm run build -- --target=x86_64-pc-windows-msvc",
+    "build:prod": "npm run build -- --target=$TARGET",
     "dev": "cargo watch -x run"
   },
   "devDependencies": {
-    "ui": "workspace:*",
-    "cross-env": "7.0.3" 
+    "ui": "workspace:*"
   }
 }

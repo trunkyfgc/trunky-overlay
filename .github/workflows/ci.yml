@@ -10,22 +10,21 @@ jobs:
     name: Build and Test
     timeout-minutes: 15
     runs-on: '${{ matrix.os }}'
+    env:
+     TARGET: ${{ matrix.target }}
     strategy:
       matrix:
         include:
           - os: macos-latest
             target: x86_64-apple-darwin
             suffix: ''
-            command: build:macos
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             suffix: ''
-            command: build:linux
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             suffix: .exe
-            command: build:windows
-
+    
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -54,11 +53,12 @@ jobs:
           override: true
           target: ${{ matrix.target }}
 
-      - name: Cache for Turbo
-        uses: rharkor/caching-for-turbo@v1.5
+      # - name: Cache for Turbo
+      #   uses: rharkor/caching-for-turbo@v1.5
  
       - name: Build
-        run: pnpm ${{ matrix.command }}
+        shell: bash
+        run: pnpm build:prod
  
       - name: Upload artifact
         uses: actions/upload-artifact@v4
