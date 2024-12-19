@@ -53,14 +53,8 @@ jobs:
           override: true
           target: ${{ matrix.target }}
 
-      - name: Cache for Turbo
-        uses: rharkor/caching-for-turbo@v1.5
-
-      - name: test echo
-        shell: bash
-        run: |
-          echo %TARGET%
-          echo $TARGET
+      # - name: Cache for Turbo
+      #   uses: rharkor/caching-for-turbo@v1.5
  
       - name: Build
         shell: bash
