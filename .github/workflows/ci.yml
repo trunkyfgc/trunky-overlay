@@ -56,9 +56,6 @@ jobs:
           override: true
           target: ${{ matrix.target }}
 
-      - name: Cache turbo build setup
-        uses: dtinth/setup-github-actions-caching-for-turbo@v1
-
       - name: Build
         shell: bash
         run: pnpm build:prod
