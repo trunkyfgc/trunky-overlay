@@ -2,9 +2,8 @@ name: CI
  
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    types: [opened, synchronize]
+    branches: ["monorepo"]
+  pull_request: null
  
 jobs:
   build:
