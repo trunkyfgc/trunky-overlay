@@ -12,7 +12,7 @@
 	}
 
 	function reset() {
-		scoreboardStore.reset();
+		//scoreboardStore.reset();
 		//playerListStore.reset();
 		dialog.close();
 	}
