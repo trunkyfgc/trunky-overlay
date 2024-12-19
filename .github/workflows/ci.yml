@@ -43,6 +43,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install Rust build target
+        run: rustup target add ${{ matrix.target }}
+
       - name: Cache turbo build setup
         uses: actions/cache@v4
         with: 
@@ -52,7 +55,7 @@ jobs:
             ${{ runner.os }}-turbo-
  
       - name: Build
-        run: 'TARGET=${{ matrix.target }} pnpm build:prod'
+        run: TARGET=${{ matrix.target }} pnpm build:prod
  
       - name: Upload artifact
         run: |
