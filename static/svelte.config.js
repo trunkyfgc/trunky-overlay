@@ -9,8 +9,5 @@ export default {
 			precompress: false,
 			strict: true,
 		}),
-	},
-	compilerOptions: {
-		customElement: true,
-	},
+	}
 };
