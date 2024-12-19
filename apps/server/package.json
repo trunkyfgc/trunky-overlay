@@ -1,7 +1,6 @@
 {
   "name": "server",
   "scripts": {
-    "preinstall": "cargo install cargo-watch",
     "build": "cargo build --release ",
     "build:prod": "npm run build -- --target=$TARGET",
     "dev": "cargo watch -x run"
