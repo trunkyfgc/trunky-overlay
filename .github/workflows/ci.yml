@@ -65,7 +65,6 @@ jobs:
             ${{ runner.os }}-turbo-
 
       - name: Build
-        shell: bash
         run: pnpm build:prod
  
       - name: Upload artifact
