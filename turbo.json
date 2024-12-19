@@ -8,11 +8,20 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".svelte-kit/**", ".vercel/**", "target/release/**"]
     },
-    "build:prod": {
-      "dependsOn": ["^build", "^build:prod"],
+    "build:linux": {
+      "dependsOn": ["^build", "^build:linux"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".svelte-kit/**", ".vercel/**", "target/release/**"],
-      "env": ["TARGET"]
+      "outputs": [".svelte-kit/**", ".vercel/**", "target/release/**"]
+    },
+    "build:macos": {
+      "dependsOn": ["^build", "^build:macos"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".svelte-kit/**", ".vercel/**", "target/release/**"]
+    },
+    "build:windows": {
+      "dependsOn": ["^build", "^build:windows"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".svelte-kit/**", ".vercel/**", "target/release/**"]
     },
     "lint": {},
     "dev": {
