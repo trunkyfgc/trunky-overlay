@@ -35,3 +35,4 @@ vite.config.js.timestamp-*
 yarn-debug.log*
 yarn-error.log*
 yarn.lock
+.vscode/
