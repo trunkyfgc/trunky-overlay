@@ -58,6 +58,7 @@ jobs:
         run: TARGET=${{ matrix.target }} pnpm build:prod
  
       - name: Upload artifact
-        run: |
-          cd apps/server/target/${{ matrix.target }}/release
-          ls
+        uses: actions/upload-artifact@v4
+        with: 
+         name: ${{ matrix.target }}
+         path: apps/server/target/${{ matrix.target }}/release/trunky-overlay${{ matrix.suffix }}
