@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-latest
+          - os: macos-latest3
             target: x86_64-apple-darwin
             suffix: ''
           - os: ubuntu-latest
@@ -49,12 +49,7 @@ jobs:
         run: pnpm install
 
       - name: Install Rust build target
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-          target: ${{ matrix.target }}
+        run: rustup target add ${{ matrix.target }}
 
       - name: Cache turbo build setup
         uses: actions/cache@v4
