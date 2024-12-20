@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-latest3
+          - os: macos-latest
             target: x86_64-apple-darwin
             suffix: ''
           - os: ubuntu-latest
