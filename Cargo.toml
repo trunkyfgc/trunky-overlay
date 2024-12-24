@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.7"
+axum = { version ="0.7", default-features = false, features = ["tokio", "http1"]}
+print-no-std = "0.2.1"
 tokio = { version = "1.42.0", default-features = false, features = ["rt-multi-thread", "macros"] }
-anyhow = "1.0"
 tower-http ={ version="0.6.2", default-features = false, features= ["cors"] }
 
 [dependencies.embed_static]
@@ -18,8 +18,12 @@ path= "./libs/socket"
 [dependencies.parser]
 path= "./libs/parser"
 
+[profile.dev]
+panic = "abort"
+
 [profile.release]
-opt-level = 'z'
-lto = true
-codegen-units = 1
-strip = true
+opt-level = "z"     # Optimize for size.
+lto = true          # Enable Link Time Optimization
+codegen-units = 1   # Reduce number of codegen units to increase optimizations.
+panic = "abort"     # Abort on panic
+strip = true        # Automatically strip symbols from the binary.

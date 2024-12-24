@@ -35,7 +35,7 @@
 	}
 
 	.background {
-		background-image: url(./assets/scoreboard-dn.webp);
+		background-image: url('assets/scoreboard-dn.webp');
 		width: 1920px;
 		height: 1080px;
 		position: relative;

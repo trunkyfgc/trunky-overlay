@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum-embed = "0.1.0"
+axum-embed = {version = "0.1.0", default-features = false}
 rust-embed = "8.5.0"
 
 [dependencies.parser]
